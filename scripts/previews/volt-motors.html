@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="_base.css">
+<style>
+  :root { --bg:#08090B; --teal:#3DE0C5; --fg:#E8ECEF; --mute: rgba(232,236,239,.55); --line: rgba(232,236,239,.1); }
+  body { background: var(--bg); color: var(--fg); font-family: 'Space Grotesk', sans-serif; }
+  nav { height: 80px; border-bottom: 1px solid var(--line); }
+  .logo { font-weight: 700; font-size: 22px; letter-spacing: .28em; } .logo b { color: var(--teal); }
+  .links { gap: 34px; font-size: 14px; color: var(--mute); }
+  .cta { background: var(--teal); color: #04110E; padding: 12px 20px; font-weight: 700; font-size: 14px; border-radius: 4px; }
+  .hero { position: relative; padding-top: 64px; text-align: center; overflow: hidden; }
+  .hero::before { content:''; position:absolute; left: 50%; top: 260px; width: 1200px; height: 600px; transform: translateX(-50%); background: radial-gradient(50% 50% at 50% 50%, rgba(61,224,197,.22), transparent 70%); }
+  .model { font-size: 14px; letter-spacing: .4em; color: var(--teal); text-transform: uppercase; }
+  h1 { font-weight: 700; font-size: 132px; line-height: .92; letter-spacing: -.04em; margin-top: 18px; position: relative; }
+  h1 span { color: transparent; -webkit-text-stroke: 1.5px rgba(232,236,239,.5); }
+  .sub { color: var(--mute); font-size: 18px; margin-top: 18px; position: relative; }
+  .car { position: relative; width: 1080px; margin: 10px auto 0; }
+  .car svg { width: 100%; height: auto; }
+  .floor { position: absolute; left: 0; right: 0; bottom: 18px; height: 2px; background: linear-gradient(90deg, transparent, rgba(61,224,197,.6), transparent); }
+  .specs { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 10px; }
+  .specs div { padding: 30px 0; border-right: 1px solid var(--line); text-align: center; } .specs div:last-child { border-right: 0; }
+  .specs b { display:block; font-size: 42px; font-weight: 500; letter-spacing: -.02em; } .specs b small { font-size: 18px; color: var(--mute); margin-left: 4px; }
+  .specs span { font-size: 13px; color: var(--mute); text-transform: uppercase; letter-spacing: .14em; }
+  .btns { justify-content: center; gap: 14px; margin: 40px 0 0; }
+  .btn { padding: 17px 30px; font-weight: 700; font-size: 15px; border-radius: 4px; border: 1px solid var(--line); }
+  .btn.pri { background: var(--fg); color: var(--bg); }
+  .grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; padding: 110px 0 100px; }
+  .tile { border: 1px solid var(--line); border-radius: 14px; padding: 32px; min-height: 300px; position: relative; overflow: hidden; background: linear-gradient(180deg, #0E1013, #0A0B0D); }
+  .tile h3 { font-size: 28px; font-weight: 500; letter-spacing: -.01em; max-width: 280px; }
+  .tile p { color: var(--mute); margin-top: 12px; font-size: 15px; line-height: 1.6; max-width: 320px; }
+  .tile .glow { position:absolute; right: -60px; bottom: -80px; width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle, rgba(61,224,197,.35), transparent 65%); }
+  .ring { position:absolute; right: 30px; bottom: 30px; width: 130px; height: 130px; border-radius: 50%; background: conic-gradient(var(--teal) 0 78%, rgba(232,236,239,.08) 78% 100%); -webkit-mask: radial-gradient(circle, transparent 54px, #000 55px); }
+  .ringtxt { position:absolute; right: 30px; bottom: 30px; width:130px; height:130px; display:grid; place-items:center; font-size: 26px; font-weight: 700; }
+  .swatches { position:absolute; left: 32px; bottom: 32px; gap: 10px; } .swatches i { width: 34px; height: 34px; border-radius: 50%; display:block; border: 2px solid rgba(255,255,255,.15); }
+  @media (max-width: 600px) {
+    nav { height: 64px; } .logo { font-size: 17px; } .cta { padding: 10px 14px; font-size: 13px; }
+    .hero { padding-top: 40px; } h1 { font-size: 64px; } .sub { font-size: 15px; padding: 0 20px; }
+    .car { width: 116%; margin-left: -8%; margin-top: 18px; }
+    .specs { grid-template-columns: repeat(2, 1fr); } .specs div:nth-child(2) { border-right: 0; } .specs div { padding: 20px 0; border-bottom: 1px solid var(--line); } .specs b { font-size: 30px; }
+    .btns { flex-direction: column; padding: 0 20px; margin-top: 26px; } .btn { text-align: center; }
+    .grid { grid-template-columns: 1fr; padding: 60px 0; }
+  }
+</style></head><body>
+<nav><div class="wrap row between" style="height:100%">
+  <div class="logo">VOLT<b>·</b>MOTORS</div>
+  <div class="links row desk"><a>Models</a><a>Charging</a><a>Ownership</a><a>Showrooms</a></div>
+  <a class="cta">Book a test drive</a>
+</div></nav>
+<section class="hero">
+  <div class="model">The all-new Volt S</div>
+  <h1>Electric.<br><span>Effortless.</span></h1>
+  <p class="sub">A performance EV designed for city streets and open highways.</p>
+  <div class="car">
+    <svg viewBox="0 0 1000 340" fill="none">
+      <defs>
+        <linearGradient id="body" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3A424B"/><stop offset=".45" stop-color="#1A1F25"/><stop offset="1" stop-color="#0B0D10"/></linearGradient>
+        <linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#3DE0C5" stop-opacity="0"/><stop offset=".5" stop-color="#9FF5E6" stop-opacity=".85"/><stop offset="1" stop-color="#3DE0C5" stop-opacity="0"/></linearGradient>
+        <linearGradient id="glass2" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#5C6E7A"/><stop offset=".4" stop-color="#11161B"/><stop offset=".7" stop-color="#2A3640"/><stop offset="1" stop-color="#0B0E11"/></linearGradient>
+        <radialGradient id="rim" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#C9D1D8"/><stop offset=".55" stop-color="#6A737C"/><stop offset=".8" stop-color="#2A2F35"/><stop offset="1" stop-color="#15181B"/></radialGradient>
+        <filter id="blur"><feGaussianBlur stdDeviation="10"/></filter>
+      </defs>
+      <ellipse cx="505" cy="300" rx="440" ry="16" fill="#000" opacity=".9" filter="url(#blur)"/>
+      <path d="M70 272 C50 264 44 242 58 228 C92 206 170 194 300 186 C360 182 400 178 432 172 C482 132 542 110 622 106 C702 102 772 112 822 140 C872 164 920 182 948 198 C962 208 962 242 952 264 L872 270 A72 72 0 0 0 728 270 L334 270 A72 72 0 0 0 190 270 Z" fill="url(#body)"/>
+      <path d="M452 172 C502 140 550 122 620 119 C692 116 752 126 794 148 L782 162 C700 164 562 168 452 172 Z" fill="url(#glass2)"/>
+      <path d="M60 230 C120 206 260 196 430 186 C560 178 760 176 944 200" stroke="url(#shine)" stroke-width="2"/>
+      <path d="M62 226 L128 214" stroke="#E9FFFB" stroke-width="4" stroke-linecap="round"/>
+      <path d="M902 196 L952 206" stroke="#FF3B5C" stroke-width="5" stroke-linecap="round"/>
+      <path d="M560 186 L600 185" stroke="#8C98A3" stroke-width="3" stroke-linecap="round"/>
+      <g><circle cx="262" cy="270" r="60" fill="#0A0B0D"/><circle cx="262" cy="270" r="42" fill="url(#rim)"/><g stroke="#0F1215" stroke-width="5"><path d="M262 232v76M224 270h76M235 243l54 54M289 243l-54 54"/></g><circle cx="262" cy="270" r="9" fill="#3DE0C5"/></g>
+      <g><circle cx="800" cy="270" r="60" fill="#0A0B0D"/><circle cx="800" cy="270" r="42" fill="url(#rim)"/><g stroke="#0F1215" stroke-width="5"><path d="M800 232v76M762 270h76M773 243l54 54M827 243l-54 54"/></g><circle cx="800" cy="270" r="9" fill="#3DE0C5"/></g>
+    </svg>
+    <div class="floor"></div>
+  </div>
+  <div class="wrap specs">
+    <div><b>480<small>km</small></b><span>Est. range</span></div>
+    <div><b>5.8<small>s</small></b><span>0–100 km/h</span></div>
+    <div><b>30<small>min</small></b><span>10–80% fast charge</span></div>
+    <div><b>5<small>seats</small></b><span>Premium cabin</span></div>
+  </div>
+  <div class="btns row"><a class="btn pri">Book a test drive</a><a class="btn">Explore Volt S</a></div>
+</section>
+<section class="wrap grid">
+  <div class="tile"><h3>Charge at home or on the go.</h3><p>A home charger setup and access to fast-charging partners across the city.</p><div class="ring"></div><div class="ringtxt">78%</div></div>
+  <div class="tile"><h3>Six finishes.</h3><p>From Glacier White to Midnight Teal.</p><div class="swatches row"><i style="background:#EDEFF1"></i><i style="background:#1D2329"></i><i style="background:#0F5C54"></i><i style="background:#8A1F2B"></i></div></div>
+  <div class="tile"><h3>Easy EMI options.</h3><p>Get a personalised quote from our showroom team.</p><div class="glow"></div></div>
+</section>
+</body></html>

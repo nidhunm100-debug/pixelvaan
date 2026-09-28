@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="_base.css">
+<style>
+  :root { --cream:#EFE8DD; --ink:#2B2420; --terra:#B4532A; --gold:#D9A441; --sand:#E2D6C4; }
+  body { background: var(--cream); color: var(--ink); }
+  .serif { font-family: 'Cormorant Garamond', serif; }
+  .bar { background: var(--ink); color: var(--cream); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; text-align: center; padding: 10px; }
+  nav { height: 84px; border-bottom: 1px solid rgba(43,36,32,.12); }
+  nav .links { gap: 32px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+  .logo { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 26px; letter-spacing: .32em; }
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; padding: 64px 0 88px; align-items: center; }
+  .eyebrow { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--terra); }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 132px; line-height: .9; letter-spacing: -.02em; margin: 22px 0 28px; }
+  h1 em { color: var(--terra); }
+  .lead { font-size: 18px; line-height: 1.6; max-width: 440px; color: rgba(43,36,32,.75); }
+  .btns { gap: 14px; margin-top: 36px; }
+  .btn { padding: 17px 30px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; border: 1px solid var(--ink); }
+  .btn.dark { background: var(--ink); color: var(--cream); }
+  .stage { position: relative; height: 620px; }
+  .drape { position: absolute; border-radius: 2px; }
+  .d1 { inset: 0 80px 0 60px;
+    background:
+      linear-gradient(97deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,0) 14%, rgba(255,255,255,.18) 26%, rgba(0,0,0,.28) 41%, rgba(0,0,0,0) 55%, rgba(255,255,255,.14) 68%, rgba(0,0,0,.34) 84%, rgba(0,0,0,.1) 100%),
+      repeating-linear-gradient(90deg, #B4532A 0 26px, #8E3A1B 26px 30px, #D9A441 30px 36px, #B4532A 36px 70px, #2B2420 70px 74px, #E9C77E 74px 78px);
+  }
+  .d1::before { content:''; position:absolute; left:0; right:0; bottom:0; height:120px; background: repeating-linear-gradient(90deg, #D9A441 0 3px, #8E6A1F 3px 5px), #D9A441; opacity:.9;
+    mask: linear-gradient(transparent 0 20px, #000 20px 26px, transparent 26px 34px, #000 34px); }
+  .tag { position: absolute; left: 0; bottom: 64px; background: var(--cream); padding: 18px 22px; width: 250px; box-shadow: 0 30px 60px -20px rgba(43,36,32,.35); z-index: 6; }
+  .tag small { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--terra); }
+  .tag p { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-top: 6px; }
+  .tag span { font-size: 14px; color: rgba(43,36,32,.7); }
+  .d2 { width: 190px; height: 250px; right: 0; top: 60px; z-index: 4; border: 8px solid var(--cream);
+    background: linear-gradient(120deg, rgba(0,0,0,.3), transparent 40%, rgba(255,255,255,.15) 60%, rgba(0,0,0,.25)),
+      repeating-linear-gradient(0deg, rgba(43,36,32,.85) 0 3px, transparent 3px 22px), repeating-linear-gradient(90deg, rgba(43,36,32,.85) 0 3px, transparent 3px 22px), #3F6B5B; }
+  .marquee { border-block: 1px solid rgba(43,36,32,.14); padding: 22px 0; font-family: 'Cormorant Garamond', serif; font-size: 30px; font-style: italic; white-space: nowrap; overflow: hidden; }
+  .marquee span { margin-right: 56px; } .marquee b { color: var(--terra); font-weight: 400; margin-right: 56px; }
+  .grid-h { margin: 96px 0 36px; align-items: end; }
+  .grid-h h2 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 64px; line-height: 1; }
+  .grid-h a { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; border-bottom: 1px solid; padding-bottom: 4px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-bottom: 96px; }
+  .card .img { aspect-ratio: 3/4; margin-bottom: 18px; }
+  .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; }
+  .card p { font-size: 14px; color: rgba(43,36,32,.65); margin-top: 4px; }
+  .p1 { background: linear-gradient(100deg, rgba(0,0,0,.35), transparent 30%, rgba(255,255,255,.2) 50%, rgba(0,0,0,.3)), repeating-linear-gradient(90deg, #6D1F2F 0 30px, #D9A441 30px 34px, #6D1F2F 34px 60px, #F2D9A6 60px 62px); }
+  .p2 { background: linear-gradient(80deg, rgba(0,0,0,.3), transparent 35%, rgba(255,255,255,.18) 55%, rgba(0,0,0,.3)), radial-gradient(circle at 50% 50%, #B4532A 0 5px, transparent 6px) 0 0/28px 28px, radial-gradient(circle at 50% 50%, #2B2420 0 2px, transparent 3px) 14px 14px/28px 28px, #EAD9BE; }
+  .p3 { background: linear-gradient(95deg, rgba(0,0,0,.35), transparent 30%, rgba(255,255,255,.2) 48%, rgba(0,0,0,.35)), repeating-linear-gradient(45deg, #1E3A5F 0 14px, #2F5687 14px 28px), #1E3A5F; }
+  .p4 { background: linear-gradient(105deg, rgba(0,0,0,.35), transparent 30%, rgba(255,255,255,.22) 50%, rgba(0,0,0,.3)), repeating-linear-gradient(0deg, rgba(217,164,65,.9) 0 2px, transparent 2px 16px), linear-gradient(#3B5B3A, #2E4A2D); }
+  footer { background: var(--ink); color: var(--cream); padding: 56px 0; }
+  footer .logo { font-size: 20px; }
+  footer p { font-size: 13px; opacity: .7; }
+  @media (max-width: 600px) {
+    nav { height: 64px; } .logo { font-size: 18px; letter-spacing: .26em; }
+    .hero { grid-template-columns: 1fr; gap: 28px; padding: 36px 0 56px; }
+    h1 { font-size: 64px; margin: 14px 0 18px; } .lead { font-size: 16px; }
+    .btns { flex-direction: column; align-items: stretch; margin-top: 26px; } .btn { text-align: center; }
+    .stage { height: 440px; } .d1 { inset: 0 30px 0 0; } .d2 { width: 120px; height: 160px; top: 30px; border-width: 6px; }
+    .tag { bottom: 30px; width: 210px; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } .grid-h h2 { font-size: 40px; }
+    .marquee { font-size: 22px; }
+  }
+</style></head><body>
+<div class="bar">Complimentary shipping across India · The Monsoon Edit is here</div>
+<nav><div class="wrap row between" style="height:100%">
+  <div class="links row desk"><a>New In</a><a>Collections</a><a>Handloom</a><a>Journal</a></div>
+  <svg class="mob" width="22" height="14" viewBox="0 0 22 14"><path d="M0 1h22M0 7h22M0 13h14" stroke="#2B2420" stroke-width="1.6"/></svg>
+  <div class="logo">MAISON KAAVYA</div>
+  <div class="links row desk"><a>Search</a><a>Account</a><a>Bag (2)</a></div>
+  <svg class="mob" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2B2420" stroke-width="1.6"><path d="M3 6h14l-1 12H4z"/><path d="M7 6a3 3 0 016 0"/></svg>
+</div></nav>
+<section class="wrap hero">
+  <div>
+    <div class="eyebrow">Handwoven · Spring / Summer</div>
+    <h1>The Monsoon <em>Edit</em></h1>
+    <p class="lead">Lightweight handloom cottons and silks, woven in small batches and cut for the way you move through the season.</p>
+    <div class="btns row"><a class="btn dark">Shop the collection</a><a class="btn">View lookbook</a></div>
+  </div>
+  <div class="stage">
+    <div class="drape d1 grain"></div>
+    <div class="drape d2 grain"></div>
+    <div class="tag"><small>Featured</small><p>Ikat Drape Kurta</p><span>Pure cotton · ₹4,850</span></div>
+  </div>
+</section>
+<div class="marquee"><span>Woven by hand</span><b>✦</b><span>Dyed with care</span><b>✦</b><span>Made in small batches</span><b>✦</b><span>Woven by hand</span><b>✦</b><span>Dyed with care</span></div>
+<section class="wrap">
+  <div class="grid-h row between"><h2>New arrivals</h2><a class="desk">View all</a></div>
+  <div class="grid">
+    <div class="card"><div class="img grain p1"></div><h3>Zari Stripe Saree</h3><p>Silk cotton · ₹8,900</p></div>
+    <div class="card"><div class="img grain p2"></div><h3>Block Print Co-ord</h3><p>Cotton · ₹5,400</p></div>
+    <div class="card"><div class="img grain p3"></div><h3>Indigo Weave Shirt</h3><p>Handloom · ₹3,200</p></div>
+    <div class="card"><div class="img grain p4"></div><h3>Forest Kantha Jacket</h3><p>Hand-stitched · ₹6,750</p></div>
+  </div>
+</section>
+<footer><div class="wrap row between"><div class="logo">MAISON KAAVYA</div><p class="desk">Stores · Care guide · Shipping · Contact</p></div></footer>
+</body></html>

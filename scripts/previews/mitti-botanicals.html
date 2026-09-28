@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="_base.css">
+<style>
+  :root { --bg:#F1EDE4; --olive:#5B6B3A; --clay:#C98B4E; --ink:#2E2A22; --mute: rgba(46,42,34,.6); --line: rgba(46,42,34,.12); }
+  body { background: var(--bg); color: var(--ink); }
+  .ann { background: var(--olive); color: #F1EDE4; text-align: center; font-size: 13px; padding: 10px; letter-spacing: .04em; }
+  nav { height: 78px; border-bottom: 1px solid var(--line); }
+  .logo { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 600; letter-spacing: -.02em; } .logo span { font-weight: 400; font-style: italic; font-size: 18px; color: var(--olive); margin-left: 6px; }
+  .links { gap: 30px; font-size: 15px; } .icons { gap: 22px; font-size: 15px; } .bag { background: var(--ink); color: var(--bg); border-radius: 999px; padding: 9px 16px; font-weight: 600; }
+  .hero { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; padding: 28px 0; }
+  .main { border-radius: 26px; height: 600px; position: relative; overflow: hidden; background: linear-gradient(160deg, #E4B98C, #C98B4E 60%, #A96C35); }
+  .main .copy { position: absolute; left: 52px; top: 56px; z-index: 6; max-width: 420px; }
+  .main h1 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 84px; line-height: .98; letter-spacing: -.03em; color: #2E2A22; } .main h1 i { color: #FFF4E6; }
+  .main p { margin-top: 18px; font-size: 18px; line-height: 1.55; color: rgba(46,42,34,.78); }
+  .shop { display:inline-block; margin-top: 28px; background: var(--ink); color: var(--bg); padding: 17px 28px; border-radius: 999px; font-weight: 600; }
+  .podium { position:absolute; border-radius: 50%; background: linear-gradient(180deg, #F3E3CF, #D7B48E); box-shadow: 0 20px 40px -10px rgba(80,40,10,.4); }
+  .pod-side { position:absolute; background: linear-gradient(90deg, #D9B38A, #EFD9BF 50%, #CFA478); }
+  .btl { position: absolute; border-radius: 16px 16px 12px 12px; box-shadow: 18px 24px 30px -12px rgba(80,40,10,.45); }
+  .btl .lbl { position:absolute; left: 12%; right: 12%; top: 38%; height: 36%; background: #F7F1E6; border-radius: 4px; display:grid; place-items:center; font-family: 'Fraunces', serif; font-size: 13px; color: var(--ink); text-align: center; line-height: 1.1; padding: 4px; }
+  .cap { position:absolute; left: 50%; transform: translateX(-50%); border-radius: 8px 8px 3px 3px; background: linear-gradient(90deg, #1F1C17, #4A443A 50%, #1F1C17); }
+  .side { display: grid; grid-template-rows: 1fr 1fr; gap: 20px; }
+  .promo { border-radius: 26px; padding: 34px; position: relative; overflow: hidden; }
+  .promo small { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; } .promo h3 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 34px; line-height: 1.05; margin-top: 10px; max-width: 220px; }
+  .promo a { position:absolute; left: 34px; bottom: 30px; font-weight: 600; border-bottom: 1.5px solid; padding-bottom: 2px; }
+  .pr1 { background: #2E2A22; color: #F1EDE4; } .pr2 { background: #DDE3CF; }
+  .sec { padding: 70px 0 100px; } .sh { align-items: end; margin-bottom: 30px; } .sh h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 52px; letter-spacing: -.02em; }
+  .filters { gap: 8px; } .filters span { padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 14px; } .filters .on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .prod .img { height: 330px; border-radius: 20px; background: #E8E1D3; position: relative; overflow: hidden; }
+  .prod .tag { position:absolute; left: 14px; top: 14px; background: #fff; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; z-index: 6; }
+  .prod h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; margin-top: 16px; } .prod p { color: var(--mute); font-size: 14px; margin-top: 4px; }
+  .prod .buy { margin-top: 14px; } .prod .buy b { font-size: 17px; } .prod .buy a { font-size: 14px; font-weight: 600; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; }
+  @media (max-width: 600px) {
+    nav { height: 64px; } .logo { font-size: 24px; } .logo span { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 14px 0; } .main { height: 560px; } .main .copy { left: 24px; right: 24px; top: 30px; }
+    .main h1 { font-size: 46px; } .main p { font-size: 15px; } .shop { padding: 14px 22px; margin-top: 20px; }
+    .scene { transform: scale(.62); transform-origin: 100% 100%; }
+    .side { grid-template-rows: none; grid-template-columns: 1fr; } .promo { min-height: 200px; } .promo h3 { max-width: 190px; font-size: 30px; } .pr1 .btl { right: 24px; transform: scale(.75); transform-origin: 100% 100%; }
+    .grid { grid-template-columns: 1fr 1fr; gap: 12px; } .prod .img { height: 210px; } .sh h2 { font-size: 36px; }
+  }
+</style></head><body>
+<div class="ann">Free shipping on orders over ₹999 · Cash on delivery available</div>
+<nav><div class="wrap row between" style="height:100%">
+  <div class="logo">mitti<span>botanicals</span></div>
+  <div class="links row desk"><a>Shop all</a><a>Bestsellers</a><a>Ingredients</a><a>Journal</a></div>
+  <div class="icons row"><a class="desk">Search</a><a class="desk">Account</a><a class="bag">Bag · 1</a></div>
+</div></nav>
+<section class="wrap hero">
+  <div class="main grain">
+    <div class="copy"><h1>Skincare, rooted in <i>nature.</i></h1><p>Small-batch oils, serums and creams made with Ayurvedic botanicals.</p><a class="shop">Shop bestsellers</a></div>
+    <div class="scene" style="position:absolute; inset:0">
+      <div class="pod-side" style="right: 90px; bottom: 0; width: 300px; height: 120px;"></div>
+      <div class="podium" style="right: 90px; bottom: 90px; width: 300px; height: 60px;"></div>
+      <div class="pod-side" style="right: 330px; bottom: 0; width: 220px; height: 60px;"></div>
+      <div class="podium" style="right: 330px; bottom: 34px; width: 220px; height: 50px;"></div>
+      <div class="btl" style="right: 190px; bottom: 120px; width: 100px; height: 210px; background: linear-gradient(90deg, #6B3A12, #B06A2C 45%, #5A300E);"><div class="lbl" style="font-size:11.5px">Kumkumadi<br>Face Oil</div><div class="cap" style="top:-54px; width: 36px; height: 56px;"></div></div>
+      <div class="btl" style="right: 400px; bottom: 58px; width: 88px; height: 120px; border-radius: 14px; background: linear-gradient(90deg, #D8D2C4, #FFFFFF 45%, #CFC8B9);"><div class="lbl" style="top: 30%; height: 44%">Saffron<br>Cream</div><div class="cap" style="top:-22px; width: 96px; height: 26px; border-radius: 8px; background: linear-gradient(90deg,#5B6B3A,#7E905A 50%,#4E5D31);"></div></div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="promo pr1 grain"><small style="color:#E4B98C">New</small><h3>Night Repair Oil</h3><a>Discover</a>
+      <div class="btl" style="right: 50px; bottom: -20px; width: 80px; height: 170px; background: linear-gradient(90deg, #1F2A14, #4E5D31 45%, #1A2310);"><div class="lbl" style="font-size:11px">Night<br>Oil</div><div class="cap" style="top:-44px; width: 30px; height: 46px; background: linear-gradient(90deg,#B98B4E,#E4B98C 50%,#A87A3E)"></div></div></div>
+    <div class="promo pr2 grain"><small style="color:#5B6B3A">Bundles</small><h3>Build a routine, save 15%</h3><a>Shop bundles</a></div>
+  </div>
+</section>
+<section class="wrap sec">
+  <div class="sh row between"><h2>Bestsellers</h2><div class="filters row desk"><span class="on">All</span><span>Face</span><span>Hair</span><span>Body</span></div></div>
+  <div class="grid">
+    <div class="prod"><div class="img grain"><span class="tag">Bestseller</span><div class="btl" style="left: 50%; margin-left: -40px; bottom: 50px; width: 80px; height: 160px; background: linear-gradient(90deg, #6B3A12, #B06A2C 45%, #5A300E);"><div class="lbl" style="font-size:11px">Face<br>Oil</div><div class="cap" style="top:-42px; width: 28px; height: 44px"></div></div></div><h3>Kumkumadi Face Oil</h3><p>30 ml · Brightening</p><div class="buy row between"><b>₹1,249</b><a>Add to bag</a></div></div>
+    <div class="prod"><div class="img grain" style="background:#DDE3CF"><div class="btl" style="left: 50%; margin-left: -46px; bottom: 60px; width: 92px; height: 100px; border-radius: 14px; background: linear-gradient(90deg, #D8D2C4, #FFFFFF 45%, #CFC8B9);"><div class="lbl" style="font-size:11px; top: 28%; height: 46%">Saffron<br>Cream</div><div class="cap" style="top:-20px; width: 100px; height: 24px; background: linear-gradient(90deg,#5B6B3A,#7E905A 50%,#4E5D31);"></div></div></div><h3>Saffron Day Cream</h3><p>50 g · Hydrating</p><div class="buy row between"><b>₹899</b><a>Add to bag</a></div></div>
+    <div class="prod"><div class="img grain" style="background:#EAD7C1"><div class="btl" style="left: 50%; margin-left: -34px; bottom: 50px; width: 68px; height: 180px; border-radius: 30px 30px 10px 10px; background: linear-gradient(90deg, #A9B38E, #D4DBBE 45%, #8E9A70);"><div class="lbl" style="font-size:11px">Hair<br>Elixir</div><div class="cap" style="top:-30px; width: 40px; height: 32px"></div></div></div><h3>Bhringraj Hair Elixir</h3><p>100 ml · Nourishing</p><div class="buy row between"><b>₹749</b><a>Add to bag</a></div></div>
+    <div class="prod"><div class="img grain" style="background:#E3DDD0"><span class="tag">New</span><div class="btl" style="left: 50%; margin-left: -40px; bottom: 50px; width: 80px; height: 170px; background: linear-gradient(90deg, #1F2A14, #4E5D31 45%, #1A2310);"><div class="lbl" style="font-size:11px">Night<br>Oil</div><div class="cap" style="top:-44px; width: 30px; height: 46px; background: linear-gradient(90deg,#B98B4E,#E4B98C 50%,#A87A3E)"></div></div></div><h3>Night Repair Oil</h3><p>30 ml · Restoring</p><div class="buy row between"><b>₹1,399</b><a>Add to bag</a></div></div>
+  </div>
+</section>
+</body></html>

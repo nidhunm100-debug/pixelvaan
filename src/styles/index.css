@@ -1,0 +1,304 @@
+@import 'tailwindcss';
+@import 'lenis/dist/lenis.css';
+
+/* ─── Fonts (self-hosted, preloaded in index.html) ─────────────────────────── */
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/inter-tight-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Rupee sign only (subset of latin-ext, ~1 KB). */
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/inter-tight-rupee.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+20B9;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif-italic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+/* Metric-matched fallback to reduce layout shift while fonts load. */
+@font-face {
+  font-family: 'Inter Tight Fallback';
+  src: local('Arial');
+  size-adjust: 94%;
+  ascent-override: 102%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+/* ─── Design tokens ─────────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: 'Inter Tight', 'Inter Tight Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+
+  --color-ink: #0b0b0d;
+  --color-ink-2: #111114;
+  --color-ink-3: #18181c;
+  --color-ink-4: #222228;
+  --color-paper: #f1eee7;
+  --color-paper-2: #e7e3da;
+  --color-fg: #f1eee7;
+  --color-muted: #a09d94;
+  --color-dim: #75726b;
+  --color-line: rgb(241 238 231 / 0.09);
+  --color-line-strong: rgb(241 238 231 / 0.16);
+  --color-accent: #ff5a1f;
+  --color-accent-soft: #ff8a5b;
+  --color-accent-deep: #c4400c;
+  --color-dusk: #26305e;
+  --color-whatsapp: #25d366;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+
+  --breakpoint-xs: 400px;
+  --breakpoint-3xl: 1800px;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-drift: drift 18s ease-in-out infinite alternate;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-ping-soft: ping-soft 2.4s var(--ease-out-quart) infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -12px, 0); }
+  }
+  @keyframes drift {
+    0% { transform: translate3d(-4%, 0, 0) scale(1); }
+    100% { transform: translate3d(4%, -3%, 0) scale(1.08); }
+  }
+  @keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+  @keyframes ping-soft {
+    0% { transform: scale(1); opacity: 0.55; }
+    80%, 100% { transform: scale(2.2); opacity: 0; }
+  }
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    background: var(--color-ink);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: clip;
+  }
+  body {
+    background: var(--color-ink);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: 'ss01', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+    min-height: 100dvh;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  /* Sections are focus targets for in-page navigation; don't outline them. */
+  section:focus-visible,
+  [tabindex='-1']:focus-visible {
+    outline: none;
+  }
+  [id] {
+    scroll-margin-top: 80px;
+  }
+  img,
+  svg,
+  video {
+    display: block;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+/* ─── Components & utilities ────────────────────────────────────────────────── */
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+  }
+  .section-y {
+    padding-block: clamp(5.5rem, 12vw, 10rem);
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--color-accent);
+  }
+  .display {
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+  .serif-accent {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  /* Glass surface — falls back to solid on low-power devices. */
+  .glass {
+    background: rgb(17 17 20 / 0.62);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+  [data-effects='lite'] .glass {
+    background: rgb(17 17 20 / 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  /* Animated underline for text links. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s var(--ease-out-expo);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+    background-position: 0% 100%;
+  }
+  /* Card with a light that follows the pointer (--mx/--my set in JS). */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 50%),
+      rgb(255 90 31 / var(--spot-alpha, 0.1)),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out-quart);
+    pointer-events: none;
+  }
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+  /* Word-mask used by text reveals. Padding keeps descenders un-clipped. */
+  .word-mask {
+    display: inline-block;
+    overflow: clip;
+    vertical-align: top;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+  .word-mask > span {
+    display: inline-block;
+    will-change: transform;
+  }
+  .noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* Background screens in the hero: dimmed; softly defocused on capable desktops. */
+  .depth-blur {
+    filter: saturate(0.7) brightness(0.7);
+  }
+  @media (min-width: 768px) {
+    [data-effects='full'] .depth-blur {
+      filter: blur(1.5px) saturate(0.7) brightness(0.7);
+    }
+  }
+  .pixel-grid {
+    background-image:
+      linear-gradient(to right, rgb(241 238 231 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(241 238 231 / 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Pause ambient CSS animations for elements scrolled out of view. */
+[data-offscreen='true'],
+[data-offscreen='true'] * {
+  animation-play-state: paused !important;
+}
+
+/* Custom cursor: hide the native one only while the custom cursor is active,
+   but keep the text caret for form fields. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none;
+}
+html.has-custom-cursor :is(input, textarea, select, [contenteditable='true']) {
+  cursor: text;
+}
+html.has-custom-cursor select {
+  cursor: pointer;
+}
+
+/* Lenis: stop smooth scrolling while overlays are open. */
+html.lenis-stopped {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

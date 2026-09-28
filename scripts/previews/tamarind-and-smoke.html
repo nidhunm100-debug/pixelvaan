@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="_base.css">
+<style>
+  :root { --bg:#141110; --ember:#E0703A; --cream:#F3E6D3; --rust:#7A2E1C; --line: rgba(243,230,211,.14); }
+  body { background: var(--bg); color: var(--cream); }
+  .serif { font-family: 'DM Serif Display', serif; }
+  nav { height: 88px; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 26px; } .logo i { color: var(--ember); }
+  .links { gap: 36px; font-size: 14px; color: rgba(243,230,211,.75); }
+  .cta { background: var(--ember); color: #1a0f0a; padding: 13px 22px; border-radius: 999px; font-weight: 600; font-size: 14px; }
+  .hero { overflow: visible; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; min-height: 740px; position: relative; }
+  .hero::before { content:''; position:absolute; right:-10%; top: 5%; width: 900px; height: 900px; background: radial-gradient(circle, rgba(224,112,58,.22), transparent 60%); pointer-events:none; }
+  .kicker { font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: var(--ember); }
+  h1 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 112px; line-height: .95; margin: 20px 0 26px; letter-spacing: -.01em; }
+  h1 i { color: var(--ember); }
+  .lead { font-size: 19px; line-height: 1.6; color: rgba(243,230,211,.72); max-width: 470px; }
+  .btns { gap: 14px; margin-top: 36px; }
+  .btn { padding: 17px 28px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1px solid var(--line); }
+  .btn.pri { background: var(--cream); color: var(--bg); border-color: var(--cream); }
+  .info { gap: 28px; margin-top: 44px; font-size: 14px; color: rgba(243,230,211,.6); }
+  .info b { display:block; color: var(--cream); font-weight: 500; margin-bottom: 4px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #56D38A; display: inline-block; margin-right: 8px; box-shadow: 0 0 0 4px rgba(86,211,138,.18); }
+  .plate-wrap { position: relative; height: 640px; }
+  .board { position:absolute; inset: 20px 0 20px 40px; border-radius: 28px; background: radial-gradient(120% 90% at 30% 20%, #2A221E, #171311 70%); }
+  .plate { position: absolute; width: 470px; height: 470px; left: 110px; top: 70px; border-radius: 50%;
+    background: radial-gradient(circle, #F4EFE8 0 60%, #E6DED3 61%, #FBF8F3 66%, #D8CFC3 70%, #CFC5B8 71%);
+    box-shadow: 0 50px 80px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(0,0,0,.2); }
+  .curry { position:absolute; inset: 70px; border-radius: 50%;
+    background: radial-gradient(circle at 42% 40%, #F0A04B 0 8%, transparent 30%), radial-gradient(circle at 60% 62%, #9D3A16, transparent 45%), radial-gradient(circle, #D2621F 0 55%, #B34715 70%, #8E3310 100%); }
+  .swirl { position:absolute; inset: 120px; border-radius: 50%; border: 10px solid rgba(250,240,225,.85); border-left-color: transparent; border-bottom-color: transparent; transform: rotate(20deg); filter: blur(.4px); }
+  .tikka { position:absolute; width: 58px; height: 46px; border-radius: 14px; background: radial-gradient(circle at 30% 30%, #E07A3A, #8A2C0F 60%, #3B130A); box-shadow: inset -6px -6px 10px rgba(0,0,0,.4); }
+  .leaf { position:absolute; width: 14px; height: 9px; border-radius: 50%; background: #4E8A3A; box-shadow: inset -2px -2px 3px rgba(0,0,0,.3); }
+  .bowl { position: absolute; width: 170px; height: 170px; right: 20px; bottom: 30px; border-radius: 50%; background: radial-gradient(circle, #F4EFE8 0 58%, #D8CFC3 62%, #FBF8F3 70%, #CFC5B8 72%); box-shadow: 0 30px 50px -15px rgba(0,0,0,.7); }
+  .bowl::before { content:''; position:absolute; inset: 34px; border-radius:50%; background: radial-gradient(circle at 40% 35%, #F7F1E4, #EADFC9 60%, #C9B48E); }
+  .chili { position:absolute; left: 70px; bottom: 60px; width: 150px; height: 26px; border-radius: 20px 60px 60px 20px; background: linear-gradient(#E0442B, #9E1F12); transform: rotate(-25deg); box-shadow: 0 16px 20px -8px rgba(0,0,0,.6); }
+  .chili::before { content:''; position:absolute; left:-18px; top: 6px; width: 24px; height: 10px; border-radius: 8px; background: #3F6E2E; }
+  section.menu { padding: 110px 0 100px; border-top: 1px solid var(--line); }
+  .mh { align-items: end; margin-bottom: 56px; }
+  .mh h2 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 72px; line-height: 1; }
+  .tabs { gap: 10px; } .tabs span { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); font-size: 14px; color: rgba(243,230,211,.7); } .tabs .on { background: var(--cream); color: var(--bg); }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 96px; }
+  .item { padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .item .row { gap: 16px; } .item h3 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 26px; }
+  .item .lead-dots { flex: 1; border-bottom: 1px dotted rgba(243,230,211,.3); transform: translateY(-6px); }
+  .item .price { font-size: 18px; color: var(--ember); font-weight: 600; }
+  .item p { font-size: 15px; color: rgba(243,230,211,.55); margin-top: 6px; }
+  .tag { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; border: 1px solid rgba(224,112,58,.5); color: var(--ember); border-radius: 999px; padding: 3px 8px; }
+  .band { margin: 0 auto 90px; border-radius: 28px; padding: 56px 64px; background: linear-gradient(120deg, #7A2E1C, #3A1A12); }
+  .band h3 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 48px; }
+  .band p { color: rgba(243,230,211,.7); margin-top: 8px; font-size: 17px; }
+  @media (max-width: 600px) {
+    nav { height: 68px; } .logo { font-size: 21px; } .cta { padding: 10px 16px; font-size: 13px; }
+    .hero { grid-template-columns: 1fr; min-height: 0; padding: 28px 0 40px; gap: 8px; }
+    h1 { font-size: 58px; margin: 14px 0 18px; } .lead { font-size: 16px; }
+    .btns { margin-top: 26px; } .btn { padding: 14px 20px; font-size: 14px; }
+    .info { gap: 20px; margin-top: 28px; font-size: 13px; flex-wrap: wrap; }
+    .plate-wrap { height: 360px; } .board { inset: 10px 0; }
+    .plate { left: 24px; top: 34px; transform: scale(.6); transform-origin: 0 0; }
+    .bowl { width: 110px; height: 110px; right: 6px; bottom: 16px; } .bowl::before { inset: 22px; }
+    .chili { display: none; }
+  }
+</style></head><body>
+<nav><div class="wrap row between" style="height:100%">
+  <div class="logo">Tamarind <i>&amp;</i> Smoke</div>
+  <div class="links row desk"><a>Menu</a><a>Reservations</a><a>Private dining</a><a>Visit us</a></div>
+  <a class="cta">Book a table</a>
+</div></nav>
+<section class="wrap hero">
+  <div style="position:relative; z-index:2">
+    <div class="kicker">Modern Indian Grill</div>
+    <h1>Fire, spice &amp; slow <i>evenings.</i></h1>
+    <p class="lead">Charcoal-kissed kebabs, slow-cooked curries and a cocktail list inspired by the spice routes.</p>
+    <div class="btns row"><a class="btn pri">Reserve a table</a><a class="btn">View the menu</a></div>
+    <div class="info row">
+      <div><b><span class="dot"></span>Open today</b>12–4 PM · 7–11:30 PM</div>
+      <div class="desk"><b>Find us</b>100 Feet Road, Bengaluru</div>
+    </div>
+  </div>
+  <div class="plate-wrap">
+    <div class="board grain"></div>
+    <div class="plate">
+      <div class="curry"></div><div class="swirl"></div>
+      <div class="tikka" style="left:120px; top:110px; transform: rotate(-12deg)"></div>
+      <div class="tikka" style="left:250px; top:150px; transform: rotate(18deg)"></div>
+      <div class="tikka" style="left:170px; top:260px; transform: rotate(6deg)"></div>
+      <div class="leaf" style="left:210px; top:120px"></div><div class="leaf" style="left:300px; top:250px; transform: rotate(40deg)"></div>
+      <div class="leaf" style="left:150px; top:210px; transform: rotate(-30deg)"></div><div class="leaf" style="left:260px; top:320px"></div>
+      <div class="leaf" style="left:320px; top:190px; transform: rotate(70deg)"></div>
+    </div>
+    <div class="bowl"></div>
+    <div class="chili desk"></div>
+  </div>
+</section>
+<section class="menu"><div class="wrap">
+  <div class="mh row between"><h2>Tonight’s menu</h2><div class="tabs row desk"><span class="on">From the tandoor</span><span>Curries</span><span>Cocktails</span></div></div>
+  <div class="cols">
+    <div class="item"><div class="row"><h3>Smoked paneer tikka</h3><span class="lead-dots"></span><span class="price">₹420</span></div><p>Hung-curd marinade, charred peppers, mint chutney</p></div>
+    <div class="item"><div class="row"><h3>Tandoori prawns</h3><span class="lead-dots"></span><span class="price">₹690</span></div><p>Ajwain, lemon butter, burnt garlic</p></div>
+    <div class="item"><div class="row"><h3>Seekh kebab</h3><span class="tag">Chef’s pick</span><span class="lead-dots"></span><span class="price">₹540</span></div><p>Hand-minced lamb, coal-smoked, onion salad</p></div>
+    <div class="item"><div class="row"><h3>Malai broccoli</h3><span class="lead-dots"></span><span class="price">₹380</span></div><p>Cheese and cardamom cream, toasted seeds</p></div>
+  </div>
+</div></section>
+<div class="wrap band row between"><div><h3>Celebrating something?</h3><p>Private dining for up to 24 guests.</p></div><a class="btn pri desk">Enquire now</a></div>
+</body></html>

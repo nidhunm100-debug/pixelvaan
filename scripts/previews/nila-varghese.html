@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="_base.css">
+<style>
+  :root { --bg:#F4F1EA; --ink:#1A1A1A; --coral:#FF6B4A; --peri:#9DB5FF; --mute: rgba(26,26,26,.55); --line: rgba(26,26,26,.12); }
+  body { background: var(--bg); color: var(--ink); }
+  .syne { font-family: 'Syne', sans-serif; }
+  nav { height: 88px; }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px; } .logo span { color: var(--coral); }
+  .links { gap: 30px; font-size: 15px; }
+  .avail { gap: 10px; font-size: 14px; border: 1px solid var(--line); border-radius: 999px; padding: 10px 16px; background: #fff; }
+  .avail i { width: 8px; height: 8px; border-radius: 50%; background: #1FBF75; box-shadow: 0 0 0 4px rgba(31,191,117,.18); }
+  .hero { display: grid; grid-template-columns: 1fr 360px; gap: 56px; align-items: end; padding: 60px 0 80px; border-bottom: 1px solid var(--line); }
+  .hi { font-size: 16px; color: var(--mute); margin-bottom: 20px; }
+  h1 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 104px; line-height: .96; letter-spacing: -.035em; }
+  h1 em { font-style: normal; color: var(--coral); }
+  h1 .chip { display: inline-block; vertical-align: middle; width: 150px; height: 76px; border-radius: 999px; background: linear-gradient(120deg, var(--peri), #C9D6FF); margin: 0 8px; transform: translateY(-8px); position: relative; overflow: hidden; }
+  h1 .chip::after { content: ''; position: absolute; width: 60px; height: 60px; border-radius: 50%; background: #fff; right: 8px; top: 8px; box-shadow: -40px 0 0 -10px rgba(255,255,255,.5); }
+  .portrait { height: 440px; border-radius: 200px 200px 24px 24px; position: relative; overflow: hidden; background: linear-gradient(170deg, #FFB39E, var(--coral) 55%, #D9452A); }
+  .portrait .head { position: absolute; width: 150px; height: 170px; border-radius: 50%; left: 50%; top: 88px; transform: translateX(-50%); background: radial-gradient(circle at 40% 35%, #3B2A26, #1E1614 70%); }
+  .portrait .face { position: absolute; width: 118px; height: 138px; border-radius: 48% 48% 46% 46%; left: 50%; top: 118px; transform: translateX(-50%); background: radial-gradient(circle at 45% 40%, #C98E6E, #A86F52 70%); }
+  .portrait .body { position: absolute; width: 300px; height: 200px; border-radius: 150px 150px 0 0; left: 50%; bottom: -30px; transform: translateX(-50%); background: linear-gradient(#1A1A1A, #2B2B2B); }
+  .portrait .neck { position: absolute; width: 50px; height: 60px; left: 50%; top: 238px; transform: translateX(-50%); background: #9C654A; border-radius: 0 0 20px 20px; }
+  .meta { gap: 48px; margin-top: 44px; font-size: 15px; color: var(--mute); } .meta b { display:block; color: var(--ink); font-weight: 600; }
+  .work { padding: 90px 0 110px; }
+  .wh { align-items: end; margin-bottom: 40px; } .wh h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 56px; letter-spacing: -.03em; } .wh span { color: var(--mute); }
+  .grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; }
+  .shot { border-radius: 22px; height: 470px; position: relative; overflow: hidden; }
+  .s1 { background: #1D2A5C; } .s2 { background: #FFD9CF; }
+  .phone { position: absolute; width: 190px; height: 390px; border-radius: 30px; background: #fff; border: 7px solid #111; bottom: -40px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.5); overflow: hidden; }
+  .phone .bar { height: 60px; background: var(--peri); } .phone .l { height: 10px; border-radius: 6px; background: #E6E8EF; margin: 12px 14px 0; } .phone .l.s { width: 50%; } .phone .blk { height: 90px; border-radius: 12px; margin: 14px; background: linear-gradient(120deg, #EEF1FF, #DDE4FF); }
+  .dash { position: absolute; left: 40px; right: 40px; top: 50px; bottom: -20px; border-radius: 14px; background: #fff; box-shadow: 0 30px 60px -20px rgba(0,0,0,.25); padding: 22px; }
+  .dash .top { height: 14px; width: 40%; border-radius: 6px; background: #1A1A1A; } .bars { display:flex; align-items:end; gap: 10px; height: 180px; margin-top: 30px; }
+  .bars i { flex: 1; border-radius: 6px 6px 0 0; background: var(--coral); opacity: .85; } .bars i:nth-child(2n) { background: #FFB39E; }
+  .cap { margin-top: 18px; } .cap h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -.02em; } .cap p { color: var(--mute); margin-top: 6px; font-size: 15px; }
+  .tags { gap: 8px; margin-top: 14px; } .tags span { font-size: 13px; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+  @media (max-width: 600px) {
+    nav { height: 68px; } .avail { padding: 8px 12px; font-size: 12px; }
+    .hero { grid-template-columns: 1fr; gap: 30px; padding: 30px 0 50px; }
+    h1 { font-size: 50px; } h1 .chip { width: 84px; height: 44px; transform: translateY(-4px); } h1 .chip::after { width: 32px; height: 32px; right: 6px; top: 6px; box-shadow: -22px 0 0 -6px rgba(255,255,255,.5); }
+    .portrait { height: 340px; } .portrait .head { top: 40px; width: 130px; height: 150px; } .portrait .face { top: 66px; width: 104px; height: 122px; } .portrait .neck { top: 176px; } .portrait .body { bottom: -70px; width: 260px; } .meta { gap: 24px; margin-top: 26px; font-size: 14px; }
+    .grid { grid-template-columns: 1fr; } .shot { height: 360px; } .wh h2 { font-size: 38px; }
+  }
+</style></head><body>
+<nav><div class="wrap row between" style="height:100%">
+  <div class="logo">nila<span>.</span>design</div>
+  <div class="links row desk"><a>Work</a><a>About</a><a>Services</a><a>Writing</a></div>
+  <div class="avail row"><i></i>Available for projects</div>
+</div></nav>
+<section class="wrap hero">
+  <div>
+    <p class="hi">Hi, I’m Nila — an independent product designer.</p>
+    <h1>I design <em>calm,</em> useful <span class="chip"></span> software people love.</h1>
+    <div class="meta row"><div><b>Product &amp; UX design</b>Web and mobile apps</div><div class="desk"><b>Design systems</b>For growing teams</div><div><b>Based in</b>Kochi, India</div></div>
+  </div>
+  <div class="portrait grain"><div class="head"></div><div class="neck"></div><div class="face"></div><div class="body"></div></div>
+</section>
+<section class="wrap work">
+  <div class="wh row between"><h2>Selected work</h2><span class="desk">2022 — 2026</span></div>
+  <div class="grid">
+    <div><div class="shot s1 grain">
+      <div class="phone" style="left: 60px"><div class="bar"></div><div class="l"></div><div class="l s"></div><div class="blk"></div><div class="l"></div><div class="l s"></div><div class="blk"></div></div>
+      <div class="phone" style="left: 280px; bottom: -90px"><div class="bar" style="background:#FF6B4A"></div><div class="l"></div><div class="l s"></div><div class="blk"></div><div class="l"></div><div class="blk"></div></div>
+    </div><div class="cap"><h3>Habit tracking app</h3><p>Onboarding and core experience redesign.</p><div class="tags row"><span>Mobile</span><span>UX research</span><span>UI</span></div></div></div>
+    <div><div class="shot s2 grain"><div class="dash"><div class="top"></div><div class="bars"><i style="height:40%"></i><i style="height:65%"></i><i style="height:52%"></i><i style="height:80%"></i><i style="height:70%"></i><i style="height:92%"></i><i style="height:60%"></i></div></div></div>
+      <div class="cap"><h3>Analytics dashboard</h3><p>Design system and reporting views.</p><div class="tags row"><span>Web app</span><span>Design system</span></div></div></div>
+  </div>
+</section>
+</body></html>

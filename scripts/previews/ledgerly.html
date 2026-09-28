@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="_base.css">
+<style>
+  :root { --bg:#0C0F1A; --peri:#7C8CFF; --fg:#F5F6FA; --mint:#34D399; --mute: rgba(245,246,250,.58); --line: rgba(245,246,250,.09); --card:#121628; }
+  body { background: var(--bg); color: var(--fg); }
+  nav { height: 76px; }
+  .logo { font-weight: 800; font-size: 22px; letter-spacing: -.03em; gap: 10px; } .logo i { width: 26px; height: 26px; border-radius: 8px; background: linear-gradient(135deg, var(--peri), #B3BCFF); display:block; position: relative; } .logo i::after { content:''; position:absolute; inset: 7px 6px; border-top: 3px solid var(--bg); border-bottom: 3px solid var(--bg); }
+  .links { gap: 30px; font-size: 15px; color: var(--mute); }
+  .acts { gap: 18px; font-size: 15px; } .acts .pri { background: var(--fg); color: var(--bg); padding: 11px 18px; border-radius: 10px; font-weight: 600; }
+  .hero { text-align: center; padding: 70px 0 0; position: relative; }
+  .hero::before { content: ''; position:absolute; left: 50%; top: -120px; transform: translateX(-50%); width: 1300px; height: 800px; background: radial-gradient(40% 45% at 50% 40%, rgba(124,140,255,.32), transparent 70%), radial-gradient(25% 30% at 70% 55%, rgba(52,211,153,.14), transparent 70%); pointer-events:none; }
+  .pill { position: relative; display:inline-flex; align-items:center; gap: 10px; font-size: 14px; border: 1px solid var(--line); background: rgba(255,255,255,.04); border-radius: 999px; padding: 7px 14px 7px 7px; color: var(--mute); }
+  .pill b { background: var(--peri); color: var(--bg); font-size: 12px; padding: 3px 9px; border-radius: 999px; }
+  h1 { position: relative; font-weight: 700; font-size: 104px; line-height: .98; letter-spacing: -.035em; margin: 26px auto 22px; max-width: 1000px; }
+  h1 span { background: linear-gradient(90deg, #B3BCFF, var(--peri) 40%, var(--mint)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { position: relative; font-size: 20px; color: var(--mute); max-width: 620px; margin: 0 auto; line-height: 1.55; }
+  .btns { position: relative; justify-content: center; gap: 12px; margin-top: 34px; } .btns a { padding: 17px 26px; border-radius: 12px; font-weight: 600; font-size: 16px; }
+  .b1 { background: var(--peri); color: #0C0F1A; } .b2 { border: 1px solid var(--line); background: rgba(255,255,255,.03); }
+  .note { position: relative; font-size: 14px; color: var(--mute); margin-top: 16px; }
+  .app { position: relative; margin: 64px auto 0; width: min(100% - 96px, 1180px); border-radius: 18px 18px 0 0; border: 1px solid rgba(245,246,250,.14); border-bottom: 0; background: #0F1322; padding: 12px 12px 0; box-shadow: 0 -30px 120px -40px rgba(124,140,255,.5); }
+  .win { border-radius: 10px 10px 0 0; background: var(--card); display: grid; grid-template-columns: 210px 1fr; min-height: 560px; text-align: left; overflow: hidden; }
+  .sb { border-right: 1px solid var(--line); padding: 20px 14px; } .sb .it { padding: 10px 12px; border-radius: 8px; font-size: 14px; color: var(--mute); gap: 10px; } .sb .it.on { background: rgba(124,140,255,.14); color: var(--fg); }
+  .sb .it i { width: 14px; height: 14px; border-radius: 4px; border: 1.5px solid currentColor; opacity: .8; }
+  .ct { padding: 24px 28px; }
+  .ct h4 { font-size: 20px; font-weight: 600; } .ct .top { margin-bottom: 20px; } .ct .top a { font-size: 13px; background: var(--peri); color: var(--bg); border-radius: 8px; padding: 8px 12px; font-weight: 600; }
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .kpi { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; } .kpi small { font-size: 12px; color: var(--mute); } .kpi b { display:block; font-size: 28px; font-weight: 600; letter-spacing: -.02em; margin-top: 6px; } .kpi em { font-style: normal; font-size: 12px; color: var(--mint); }
+  .chart { border: 1px solid var(--line); border-radius: 12px; margin-top: 14px; padding: 16px 18px; } .chart svg { width: 100%; height: 170px; margin-top: 10px; }
+  .tbl { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .tr { display:grid; grid-template-columns: 1.4fr 1fr 1fr .8fr; padding: 13px 18px; font-size: 14px; border-top: 1px solid var(--line); color: var(--mute); } .tr:first-child { border-top: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; } .tr b { color: var(--fg); font-weight: 500; }
+  .st { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; justify-self: start; } .paid { background: rgba(52,211,153,.14); color: var(--mint); } .pend { background: rgba(251,191,36,.14); color: #FBBF24; } .due { background: rgba(248,113,113,.14); color: #F87171; }
+  .feat { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 90px 0; }
+  .f { border: 1px solid var(--line); border-radius: 16px; padding: 28px; background: linear-gradient(180deg, rgba(255,255,255,.03), transparent); } .f i { display:block; width: 38px; height: 38px; border-radius: 10px; background: rgba(124,140,255,.16); margin-bottom: 18px; } .f h3 { font-size: 20px; font-weight: 600; } .f p { color: var(--mute); margin-top: 8px; line-height: 1.6; }
+  @media (max-width: 600px) {
+    nav { height: 64px; } .acts .desk { display: none; }
+    .hero { padding-top: 40px; } h1 { font-size: 50px; } .sub { font-size: 16px; padding: 0 20px; }
+    .btns { flex-direction: column; padding: 0 20px; } .note { font-size: 13px; }
+    .app { width: calc(100% - 28px); margin-top: 40px; padding: 8px 8px 0; } .win { grid-template-columns: 1fr; min-height: 0; } .sb { display: none; }
+    .ct { padding: 16px; } .kpis { grid-template-columns: 1fr 1fr; } .kpis .kpi:nth-child(3) { display: none; } .kpi b { font-size: 20px; }
+    .tr { grid-template-columns: 1.4fr 1fr .9fr; } .tr > :nth-child(2) { display: none; }
+    .feat { grid-template-columns: 1fr; padding: 50px 0; }
+  }
+</style></head><body>
+<nav><div class="wrap row between" style="height:100%">
+  <div class="logo row"><i></i>Ledgerly</div>
+  <div class="links row desk"><a>Product</a><a>Pricing</a><a>Customers</a><a>Docs</a></div>
+  <div class="acts row"><a class="desk">Log in</a><a class="pri">Start free</a></div>
+</div></nav>
+<section class="hero">
+  <span class="pill"><b>New</b>GST-ready invoice templates</span>
+  <h1>Get paid faster.<br><span>Stress less.</span></h1>
+  <p class="sub">Send professional invoices, track payments and follow up automatically — built for India’s small businesses.</p>
+  <div class="btns row"><a class="b1">Start free trial</a><a class="b2">Book a demo</a></div>
+  <p class="note">No credit card required</p>
+  <div class="app">
+    <div class="win">
+      <div class="sb desk"><div class="logo row" style="font-size:16px; padding: 0 10px 18px"><i style="width:20px;height:20px"></i>Ledgerly</div>
+        <div class="it row on"><i></i>Overview</div><div class="it row"><i></i>Invoices</div><div class="it row"><i></i>Clients</div><div class="it row"><i></i>Payments</div><div class="it row"><i></i>Reports</div><div class="it row"><i></i>Settings</div></div>
+      <div class="ct">
+        <div class="top row between"><h4>Overview</h4><a>+ New invoice</a></div>
+        <div class="kpis">
+          <div class="kpi"><small>Revenue this month</small><b>₹4,82,300</b><em>▲ vs last month</em></div>
+          <div class="kpi"><small>Outstanding</small><b>₹96,450</b><em style="color:#FBBF24">12 invoices</em></div>
+          <div class="kpi"><small>Avg. time to pay</small><b>9 days</b><em>▼ faster</em></div>
+        </div>
+        <div class="chart"><small style="font-size:12px;color:var(--mute)">Payments received</small>
+          <svg viewBox="0 0 800 170" preserveAspectRatio="none"><defs><linearGradient id="ar" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7C8CFF" stop-opacity=".45"/><stop offset="1" stop-color="#7C8CFF" stop-opacity="0"/></linearGradient></defs>
+            <g stroke="rgba(245,246,250,.06)"><path d="M0 40h800M0 85h800M0 130h800"/></g>
+            <path d="M0 140 C60 130 90 110 140 115 C200 120 230 80 290 85 C350 90 380 60 440 70 C500 80 530 40 590 45 C650 50 690 25 740 30 L800 22 L800 170 L0 170Z" fill="url(#ar)"/>
+            <path d="M0 140 C60 130 90 110 140 115 C200 120 230 80 290 85 C350 90 380 60 440 70 C500 80 530 40 590 45 C650 50 690 25 740 30 L800 22" stroke="#7C8CFF" stroke-width="3" fill="none"/>
+            <circle cx="590" cy="45" r="6" fill="#0C0F1A" stroke="#34D399" stroke-width="3"/></svg></div>
+        <div class="tbl">
+          <div class="tr"><span>Client</span><span>Invoice</span><span>Amount</span><span>Status</span></div>
+          <div class="tr"><b>Sharma Traders</b><span>#INV-0142</span><b>₹38,000</b><span class="st paid">Paid</span></div>
+          <div class="tr"><b>Blue Door Café</b><span>#INV-0141</span><b>₹12,450</b><span class="st pend">Pending</span></div>
+          <div class="tr"><b>Pixel &amp; Pine</b><span>#INV-0139</span><b>₹64,200</b><span class="st due">Overdue</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="wrap feat">
+  <div class="f"><i></i><h3>Invoices in seconds</h3><p>Beautiful, GST-ready invoices from reusable templates.</p></div>
+  <div class="f"><i></i><h3>Automatic reminders</h3><p>Polite follow-ups by email and WhatsApp, on your schedule.</p></div>
+  <div class="f"><i></i><h3>UPI &amp; card payments</h3><p>Let clients pay instantly from the invoice link.</p></div>
+</section>
+</body></html>
